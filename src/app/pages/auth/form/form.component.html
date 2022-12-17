@@ -1,0 +1,43 @@
+<div class="app">
+    <div class="welcome">
+        <h2>¡Empecemos!</h2>
+    </div>
+    <div class="form">
+        <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+            <div *ngIf="options.id === 'sign-up'">
+                <div>
+                    <input formControlName="name" type="name" placeholder="Nombre" class="form-control"
+                        pInputText />
+                </div>
+                <div>
+                    <input formControlName="username" type="name" placeholder="Nombre de usuario" class="form-control"
+                        pInputText />
+                </div>
+            </div>
+            <div>
+                <input formControlName="email" type="email" class="form-control" placeholder="Correo Electronico"
+                    pInputText />
+            </div>
+            <div>
+                <input formControlName="password" type="password" class="form-control" placeholder="Contraseña"
+                    pInputText />
+            </div>
+            <button pButton type="submit" class="btn btn-primary">
+                {{ options.label }}
+            </button>
+        </form>
+    </div>
+
+    <br />
+    <p *ngIf="options.id === 'sign-in'">
+        No tengo una cuenta, quiero
+        <a [routerLink]="['/sign-up']">registrarme</a>
+    </p>
+    <p *ngIf="options.id === 'sign-up'">
+        Ya tengo una cuenta, quiero <a [routerLink]="['/sign-in']">iniciar sesión</a>
+    </p>
+    <br />
+    <!-- </div> -->
+</div>
+
+<p-toast></p-toast>

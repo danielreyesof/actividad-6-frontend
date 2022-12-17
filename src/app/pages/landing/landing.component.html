@@ -1,0 +1,82 @@
+<div class="grid m-0 flex justify-content-around">
+    <div class="col-12 flex align-items-center justify-content-center">
+        <h1 class="mr-2">Aplicación de notas</h1>
+        <p-chip label="{{notes.length}}"></p-chip>
+
+    </div>
+    <div class="col-12 md:col">
+        <div class="grid" style="padding: 0 5%">
+            <div class="col-12">
+                <div class="w-full py-3 px-2 xl:p-4 box-shadow-card bg-white mt-3" style="border-radius: 20px">
+                    <div class="flex flex-column px-3">
+                        <h2>Título</h2>
+                        <input type="text" pInputText [(ngModel)]="title" />
+
+                        <h2>Contenido</h2>
+                        <div class="w-full align-items-center flex flex-row">
+                            <p-editor class="col-12" [spellcheck]="false" (onInit)="initText($event)"
+                                [style]="{ height: '40vh' }" [(ngModel)]="content">
+
+                                <ng-template pTemplate="header">
+                                    <span class="ql-formats">
+                                        <button type="button" class="ql-bold" aria-label="Bold"></button>
+                                        <button type="button" class="ql-italic" aria-label="Italic"></button>
+                                        <button type="button" class="ql-underline" aria-label="Underline"></button>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-list" value="ordered"></button>
+                                        <button class="ql-list" value="bullet"></button>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <select class="ql-align"></select>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button type="button" class="ql-link" aria-label="link"></button>
+                                        <button type="button" class="ql-clean" aria-label="Remove Styles"></button>
+                                    </span>
+                                </ng-template>
+                            </p-editor>
+                        </div>
+
+                        <button pButton type="button" label="Guardar nota" class="save-note"
+                            (click)="saveNote()"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 center-content">
+                <p-button type="text" (click)="sideVisible = !sideVisible" icon="pi pi-cog"
+                    label="Configuraciones"></p-button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 md:col">
+        <div class="grid" style="padding: 0 5%">
+            <div class="col-12" *ngFor="let note of notes">
+                <div class="w-full py-3 px-2 xl:p-4 box-shadow-card bg-white mt-3" style="border-radius: 20px">
+                    <div class="grid">
+                        <div class="flex flex-row flex-wrap align-items-center justify-content-center col-12">
+                            <span><b>{{note.title}}</b></span>
+                        </div>
+                        <div class="w-12 pl-5 pr-5 flex flex-column flex-wrap align-items-start">
+                            <div [innerHtml]="note.content" class="lesson-card-description clslight cls16"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-toast position="top-left" [style]="{width: '22rem'}"></p-toast>
+
+<p-sidebar [(visible)]="sideVisible" position="right" [baseZIndex]="10000">
+
+    <div class="grid" style="padding: 0 5%">
+        <div class="col-12 center-content">
+            <p-button type="text" (click)="logout()" icon="pi pi-cog"
+                label="Cerrar sesión"></p-button>
+        </div>
+    </div>
+
+</p-sidebar>
