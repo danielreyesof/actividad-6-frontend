@@ -14,10 +14,15 @@ export interface User {
   name: string;
   username: string;
   email: string;
+  email_verified_at?: any;
+  imgURL?: any;
   status: number;
-  date_create: number;
-  date_update: number;
-  date_delete: null;
+  platform?: any;
+  push_token?: any;
+  roles: string[];
+  date_create?: Date;
+  date_update?: Date;
+  date_delete?: any;
 }
 
 export interface AuthResponse {
@@ -36,4 +41,3 @@ export interface SignInUser {
   email: string;
   password: string;
 }
-

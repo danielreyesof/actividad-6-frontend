@@ -9,7 +9,7 @@ import { CoreService } from './core.service';
   providedIn: 'root',
 })
 export class AuthService {
-  userData: any;
+  private userData: any;
   headerProperty: any;
   url: string = '';
 
@@ -19,17 +19,20 @@ export class AuthService {
     private readonly router: Router
   ) {
     this.verifyToken();
-
-    console.log(this._core.urlServicesAuth);
-
     this.url = this._core.urlServicesAuth;
-
-    console.log(this.url);
   }
 
   public setUser() {
     const session = localStorage.getItem('token');
     return session;
+  }
+
+  set user(data: any) {
+    this.userData = data;
+  }
+
+  get user() {
+    return this.userData;
   }
 
   public signUp(credentials: any) {
@@ -68,8 +71,6 @@ export class AuthService {
     return new Promise(function (resolve, reject) {
       vm._db.getQuery(url, true).subscribe({
         next: (res: any) => {
-          console.log(res);
-
           if (res.status == 200) localStorage.removeItem('token');
           return resolve(res);
         },
@@ -85,7 +86,7 @@ export class AuthService {
     return new Promise(function (resolve, reject) {
       vm._db.getQuery<UserInfo>(url, true).subscribe({
         next: (res: UserInfo) => {
-          vm.userData = res;
+          vm.user = res.user;
           return resolve(res);
         },
         error: (e: HttpErrorResponse) => {

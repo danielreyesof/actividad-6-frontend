@@ -1,27 +1,27 @@
-# Frontend
+# Aplicacion de notas
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
+Se realiza creacion de aplicacion de notas y de api para el consumo, Se manejo una base de datos en mongoDB
+para el alojamiento de toda la data de los usuarios, se manejan 2 microservicios en los cuales tenemos la 
+api de notas y la api de autenticacion, se despliega la aplicacion en la plataforma Railway, se adjuntan direcciones para 
+la visualizacion de la informacion.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Api de notas
+https://act6crud.up.railway.app/
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## Api de autenticacion
+https://act6auth.up.railway.app/
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Link en github para los microservicios:
+https://github.com/danielreyesof/actividad-6-microservices
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Link en github del frontend:
+https://github.com/danielreyesof/actividad-6-frontend
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Link de ingreso y funcionalidad de la aplicacion final:
+https://act6-front.up.railway.app

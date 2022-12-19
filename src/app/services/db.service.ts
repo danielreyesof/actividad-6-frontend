@@ -27,9 +27,6 @@ export class DbService {
     const headers = authorization
       ? new HttpHeaders(this.cors).set('authorization', `${this.setUser()}`)
       : new HttpHeaders(this.cors);
-
-      console.log({headers}, {path});
-      
     return this._http.get<T>(path, { headers: headers });
   }
 
@@ -41,7 +38,6 @@ export class DbService {
     const headers = authorization
       ? new HttpHeaders(this.cors).set('authorization', `${this.setUser()}`)
       : new HttpHeaders(this.cors);
-
     return this._http.post<T>(path, postData, { headers: headers });
   }
 

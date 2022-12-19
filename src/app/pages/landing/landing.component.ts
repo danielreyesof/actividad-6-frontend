@@ -8,7 +8,7 @@ import {
   Note,
   NotesResponse,
   SaveNote,
-  SaveNoteResponse
+  SaveNoteResponse,
 } from '../../shared/interfaces/notes';
 
 @Component({
@@ -28,18 +28,21 @@ export class LandingComponent implements OnInit, AfterViewInit {
   };
 
   notes: Note[] = [];
+  noteToEdit!: Note;
+  noteToEditId: string = '';
 
   title: string = '';
   content: SafeHtml | string = '';
 
   sideVisible: boolean = false;
+  buttonLabel: string = 'Guardar nota';
+  saveMode: string = 'save';
 
   constructor(
     private sanitizer: DomSanitizer,
     private messageService: MessageService,
     private notesService: NotesService,
-    private authService: AuthService,
-    private readonly router: Router
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -81,28 +84,40 @@ export class LandingComponent implements OnInit, AfterViewInit {
       content: this.content,
     };
 
-    await this.notesService
-      .saveNotes<SaveNoteResponse>(saveData)
-      .then(({ status }: SaveNoteResponse) => {
-        if (status != 201) return;
+    if (this.saveMode == 'save') {
+      await this.notesService
+        .saveNotes<SaveNoteResponse>(saveData)
+        .then(({ status }: SaveNoteResponse) => {
+          if (status != 201) return;
 
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Nota creada',
-          detail: 'Nota creada Exitosamente',
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Nota creada',
+            detail: 'Nota creada Exitosamente',
+          });
+
+          this.resetSettings();
         });
+    } else {
+      console.log(this.title);
 
-        this.title = '';
-        this.content = '';
+      this.noteToEdit.title = this.title;
+      this.noteToEdit.content = this.content;
 
-        this.getNotes();
-      });
-  }
+      await this.notesService
+        .editNote(this.noteToEdit)
+        .then(({ status }: any) => {
+          if (status != 201) return;
 
-  async logout() {
-    await this.authService.logOut().then((res) => {
-      this.router.navigate(['sign-in']);
-    });
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Nota editada',
+            detail: 'Nota editada Exitosamente',
+          });
+
+          this.resetSettings();
+        });
+    }
   }
 
   adjustImage(str: any) {
@@ -117,5 +132,38 @@ export class LandingComponent implements OnInit, AfterViewInit {
 
   addSingle(severity: string, summary: string, detail: string) {
     this.messageService.add({ severity, summary, detail });
+  }
+
+  async editNote(id: string) {
+    this.buttonLabel = 'Editar nota';
+    this.saveMode = 'edit';
+
+    await this.notesService.getNotesById(id).then(({ response }: any) => {
+      this.noteToEdit = response[0];
+      this.title = this.noteToEdit.title;
+      this.content = this.noteToEdit.content;
+    });
+  }
+
+  async deleteNote(id: string) {
+    await this.notesService.deleteNote(id).then(({ status }: any) => {
+      if (status != 201) return;
+
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Nota elininada',
+        detail: 'Nota elininada Exitosamente',
+      });
+
+      this.resetSettings();
+    });
+  }
+
+  resetSettings() {
+    this.title = '';
+    this.content = '';
+    this.buttonLabel = 'Crear nota';
+    this.saveMode = 'save';
+    this.getNotes();
   }
 }

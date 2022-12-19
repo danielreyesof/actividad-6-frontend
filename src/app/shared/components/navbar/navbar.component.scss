@@ -1,0 +1,17 @@
+* {
+  background-color: #e0e0e0;
+}
+
+span {
+  font-weight: 700;
+  font-size: 150% !important;
+  color: #000;
+}
+
+.flexing {
+  width: 25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}

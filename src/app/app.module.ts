@@ -20,6 +20,9 @@ import { SignInComponent } from './pages/auth/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/auth/sign-up/sign-up.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { SidebarModule } from 'primeng/sidebar';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { TooltipModule } from 'primeng/tooltip';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import { SidebarModule } from 'primeng/sidebar';
     SignInComponent,
     SignUpComponent,
     LandingComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +50,8 @@ import { SidebarModule } from 'primeng/sidebar';
     EditorModule,
     QuillModule.forRoot(),
     ChipModule,
+    TooltipModule,
+    DialogModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent],
