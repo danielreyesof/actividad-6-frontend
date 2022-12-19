@@ -1,13 +1,12 @@
 <div class="app">
     <div class="welcome">
-        <h2>¡Empecemos!</h2>
+        <h2>¡Bienvenido a nuesta app de notas!</h2>
     </div>
     <div class="form">
         <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
             <div *ngIf="options.id === 'sign-up'">
                 <div>
-                    <input formControlName="name" type="name" placeholder="Nombre" class="form-control"
-                        pInputText />
+                    <input formControlName="name" type="name" placeholder="Nombre" class="form-control" pInputText />
                 </div>
                 <div>
                     <input formControlName="username" type="name" placeholder="Nombre de usuario" class="form-control"
