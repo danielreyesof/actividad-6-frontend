@@ -4,6 +4,6 @@ export const AuthLabel = {
 };
 
 export const ACTIONS = {
-  signIn: 'Igresar',
+  signIn: 'Ingresar',
   signUp: 'Registrarme',
 };
